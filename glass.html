@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACROBATEC | Travaux en Hauteur & Accès Difficiles</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary: #ffce00; /* Industrial Yellow */
+            --secondary: #00f0ff; /* Tech Blue Accent */
+            --primary-glow: rgba(255, 206, 0, 0.4);
+            --bg: #08080a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text: #ffffff;
+            --text-dim: #a1a1a6;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="light"] {
+            --bg: #f5f5f7;
+            --glass: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --text: #1d1d1f;
+            --text-dim: #6e6e73;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden; 
+            line-height: 1.6;
+            transition: background-color 0.5s ease;
+        }
+
+        /* --- NOISE TEXTURE OVERLAY (Industrial Grit) --- */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3; opacity: 0.05; pointer-events: none;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); /* Simulated noise */
+        }
+
+        /* --- FIXED BACKGROUND --- */
+        .fixed-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2; overflow: hidden; background: #000;
+        }
+        .fixed-bg img {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.6; transform: scale(1.02);
+        }
+        .bg-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), var(--bg) 95%);
+            z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 1.5rem 2rem; background: rgba(var(--bg), 0.8);
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 50px; transition: var(--transition); filter: brightness(0) invert(1); }
+
+        .nav-links { display: none; gap: 2.5rem; list-style: none; }
+        @media (min-width: 1024px) { .nav-links { display: flex; } }
+        .nav-links a { 
+            text-decoration: none; color: inherit; font-size: 0.75rem; 
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+            opacity: 0.6; transition: 0.3s; position: relative;
+        }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; background: var(--primary); transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 0 2rem; position: relative; overflow: hidden;
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 9vw, 7rem); font-weight: 800;
+            line-height: 0.85; letter-spacing: -0.05em; margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .hero h1 span { color: var(--primary); transform-origin: center; }
+        .hero p { font-size: clamp(1.2rem, 3vw, 1.8rem); opacity: 0.9; max-width: 600px; margin-bottom: 4rem; letter-spacing: -0.02em; }
+
+        /* --- SECTIONS & GLASS CARDS --- */
+        section { padding: 100px 2rem; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+        
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            padding: 3.5rem; border-radius: 24px;
+            margin-bottom: 2rem; position: relative; overflow: hidden; transition: var(--transition);
+        }
+        
+        /* Glow Effect on Hover */
+        .glass-card:hover { 
+            border-color: var(--primary); 
+            box-shadow: inset 0 0 40px rgba(255, 206, 0, 0.1), 0 30px 80px rgba(255, 206, 0, 0.1);
+            transform: perspective(1000px) rotateX(-2deg) translateY(-10px);
+        }
+
+        .label { color: var(--primary); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; display: block; margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 2rem; font-weight: 800; color: var(--text); }
+
+        /* --- GRID SYSTEM --- */
+        .grid-main { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+        
+        .img-box { border-radius: 24px; overflow: hidden; position: relative; height: 350px; cursor: pointer; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; filter: grayscale(0.2); }
+        .img-box:hover img { transform: scale(1.05); filter: grayscale(0); }
+        
+        /* Tag Overlay */
+        .tag { position: absolute; top: 30px; left: 30px; background: var(--primary); color: #000; padding: 6px 20px; font-weight: 800; border-radius: 15px; font-size: 0.7rem; box-shadow: 0 10px 20px rgba(255, 206, 0, 0.3); }
+
+        /* --- EQUIPMENT --- */
+        .equip-scroll { display: flex; gap: 4rem; overflow-x: auto; padding: 2rem 0; scrollbar-width: none; background: var(--glass); border-radius: 15px; padding: 2rem; width: 100%; }
+        .equip-item { flex: 0 0 100px; text-align: center; position: relative; transition: var(--transition); }
+        
+        .equip-item:hover { transform: translateY(-8px); }
+        
+        .equip-item img { width: 65px; height: 65px; object-fit: contain; margin-bottom: 10px; filter: grayscale(0.3); transition: 0.4s; border-radius: 12px; background: #fff; padding: 8px; }
+        .equip-item:hover img { filter: grayscale(0) drop-shadow(0 0 15px var(--primary)); transform: scale(1.1); }
+        
+        .equip-item span { font-size: 0.7rem; font-weight: 700; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; display: block; margin-top: 5px;}
+        .equip-item:hover span { opacity: 1; color: var(--primary); }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex; align-items: center; gap: 12px;
+            padding: 1.3rem 3rem; background: var(--primary); color: #000;
+            text-decoration: none; border-radius: 50px; font-weight: 800; letter-spacing: 0.05em;
+            transition: var(--transition); position: relative; overflow: hidden;
+        }
+        
+        .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: rgba(255,255,255,0.3); transition: 0.4s ease-out; }
+        .btn:hover::before { left: 0; opacity: 0; }
+        
+        .btn:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 25px 60px var(--primary-glow); cursor: pointer; }
+
+        /* --- FOOTER & CERTS --- */
+        footer { background: rgba(0,0,0,0.8); padding: 80px 2rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 5;}
+        
+        .cert-row { display: flex; gap: 4rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap; opacity: 0.6; }
+        .cert-row img { height: 60px; filter: grayscale(1); transition: 0.5s; border-radius: 8px; background: rgba(255,255,255,0.1); padding: 10px;}
+        .cert-row img:hover { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
+
+        /* --- ANIMATION CLASSES --- */
+        .reveal { opacity: 0; transform: translateY(50px); }
+    </style>
+</head>
+<body>
+
+    <div class="fixed-bg">
+        <img src="hero.jpg" alt="Background" id="mainBg">
+        <div class="bg-overlay"></div>
+    </div>
+    
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <header>
+        <nav>
+            <div class="logo"><img src="logo.png" alt="Acrobatec"></div>
+            <ul class="nav-links">
+                <li><a href="#presentation">Présentation</a></li>
+                <li><a href="#prestations">Prestations</a></li>
+                <li><a href="#securite">Sécurité</a></li>
+                <li><a href="#equipement">Équipement</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="tBtn"><i data-lucide="moon"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1 class="reveal">TRAVAUX EN HAUTEUR<br><span>ET D'ACCÈS DIFFICILE</span></h1>
+            <p class="reveal">Expertise cordiste et maintenance technique. Interventions sécurisées là où les moyens traditionnels s'arrêtent.</p>
+            <div class="reveal">
+                <a href="#contact" class="btn">DEMANDER UN DEVIS <i data-lucide="arrow-right"></i></a>
+            </div>
+        </section>
+
+        <section id="presentation">
+            <div class="glass-card reveal">
+                <span class="label">Depuis 2002</span>
+                <h2>SOCIÉTÉ ACROBATEC</h2>
+                <p>La société <strong>ACROBATEC</strong> est spécialisée dans la maintenance en bâtiment, la maçonnerie, la couverture et la sécurisation de chantiers. Nos équipes sont composées de professionnels qualifiés du bâtiment disposant de plusieurs habilitations pour les travaux acrobatiques.</p>
+                <p style="margin-top:1rem; color: var(--text-dim)">Nous intervenons principalement sur cordes, mais également sur nacelles et échafaudages, en fonction des contraintes techniques de votre patrimoine.</p>
+            </div>
+        </section>
+
+        <section id="prestations">
+            <span class="label">Savoir-Faire</span>
+            <h2>NOS DOMAINES D'EXPERTISE</h2>
+            
+            <div class="grid-main reveal">
+                <!-- Maçonnerie -->
+                <div class="glass-card">
+                    <i data-lucide="wrench" class="label"></i>
+                    <h3 style="color: var(--text-dim)">MAÇONNERIE</h3>
+                    <p style="font-size: 0.95rem; margin-top:1rem;">Réfection de joints, purge de façades, traitement d'épaufrures et nez de balcons, pose de picots anti-pigeons.</p>
+                    <div class="img-box" style="margin-top:30px; height: 250px;"><img src="img1.jpg" alt="Maçonnerie"></div>
+                </div>
+                <!-- Cleaning -->
+                <div class="glass-card">
+                    <i data-lucide="droplet" class="label"></i>
+                    <h3 style="color: var(--text-dim)">NETTOYAGE</h3>
+                    <p style="font-size: 0.95rem; margin-top:1rem;">Nettoyage haute pression, démoussage de toitures, entretien de vitrerie difficile d'accès et dépoussiérage industriel.</p>
+                    <div class="img-box" style="margin-top:30px; height: 250px;"><img src="img2.jpg" alt="Nettoyage"></div>
+                </div>
+                <!-- Security -->
+                <div class="glass-card">
+                    <i data-lucide="shield" class="label"></i>
+                    <h3 style="color: var(--text-dim)">SÉCURISATION</h3>
+                    <p style="font-size: 0.95rem; margin-top:1rem;">Mise en place de lignes de vie, points d'ancrage, filets de protection et garde-corps autoportants.</p>
+                    <div class="img-box" style="margin-top:30px; height: 250px;"><img src="img3.jpg" alt="Sécurité"></div>
+                </div>
+            </div>
+
+            <!-- Before/After -->
+            <div class="grid-main reveal" style="margin-top: 2.5rem;">
+                <div class="img-box"><img src="before.jpg" alt="Avant"><span class="tag">AVANT</span></div>
+                <div class="img-box"><img src="after.jpg" alt="Après"><span class="tag">APRÈS</span></div>
+            </div>
+        </section>
+
+        <section id="nacelle-works">
+            <span class="label">Travaux Spéciaux</span>
+            <h2>INTERVENTIONS SUR NACELLE</h2>
+            <div class="grid-main reveal">
+                <div class="img-box"><img src="wall1.jpg" alt="Nacelle 1"></div>
+                <div class="img-box"><img src="wall2.jpg" alt="Nacelle 2"></div>
+                <div class="img-box"><img src="wall3.jpg" alt="Nacelle 3"></div>
+            </div>
+        </section>
+
+        <section id="equipement">
+            <div class="glass-card reveal">
+                <span class="label">Kit Technique</span>
+                <h2>MATÉRIEL CERTIFIÉ</h2>
+                <p style="margin-top:1rem;">La sécurité de nos intervenants repose sur un matériel de pointe, vérifié périodiquement selon les normes CE.</p>
+                <div class="equip-scroll">
+                    <div class="equip-item"><img src="icon1.png" alt="Cordes"><span>Cordes</span></div>
+                    <div class="equip-item"><img src="icon2.png" alt="Harnais"><span>Harnais</span></div>
+                    <div class="equip-item"><img src="icon3.png" alt="Casques"><span>Casques</span></div>
+                    <div class="equip-item"><img src="icon4.png" alt="Mousquetons"><span>Mousquetons</span></div>
+                    <div class="equip-item"><img src="icon5.png" alt="Descendeurs"><span>Descendeurs</span></div>
+                    <div class="equip-item"><img src="icon6.png" alt="Bloqueurs"><span>Bloqueurs</span></div>
+                    <div class="equip-item"><img src="icon7.png" alt="Amarrages"><span>Amarrages</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="securite">
+            <div class="grid-main reveal" style="align-items: center;">
+                <div>
+                    <span class="label">Normes & Rigueur</span>
+                    <h2>SÉCURITÉ ABSOLUE</h2>
+                    <p style="margin-top:1rem;">Chaque intervention fait l'objet d'une analyse des risques. Nous utilisons systématiquement deux cordes : une corde de travail et une corde de sécurité indépendante.</p>
+                    <p style="font-size:0.95rem; color: var(--text-dim); margin-top:1rem;">Conformité aux normes EN-795, EN-361 et EN-358. Protection des abords et information des riverains pour chaque chantier.</p>
+                </div>
+                <div class="img-box"><img src="img4.jpg" alt="Sécurité"></div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="glass-card reveal" style="text-align: center;">
+                <h2>CONTACTEZ NOS EXPERTS</h2>
+                <div class="grid-main" style="margin-top: 3rem; gap: 1.5rem;">
+                    <div>
+                        <p class="label">Téléphone</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em;">04 67 10 00 00</p>
+                    </div>
+                    <div>
+                        <p class="label">E-mail</p>
+                        <p style="font-size: 1.5rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em;">contact@acrobatec.fr</p>
+                    </div>
+                    <div>
+                        <p class="label">Bureau</p>
+                        <p style="font-size: 1rem; color: var(--text-dim); margin-top:5px;">12 Rue de l'Industrie, Montpellier</p>
+                    </div>
+                </div>
+                <div class="img-box" style="margin-top: 4rem; height: 300px;"><img src="img5.jpg" alt="Team"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div style="max-width: 1300px; margin: 0 auto; text-align: center;">
+            <div class="logo"><img src="logo.png" alt="Acrobatec"></div>
+            <div class="cert-row reveal">
+                <img src="certificate1.jpg" alt="Cert 1">
+                <img src="certificate2.jpg" alt="Cert 2">
+                <img src="certificate3.jpg" alt="Cert 3">
+            </div>
+            <p style="margin-top: 4rem; font-size: 0.7rem; letter-spacing: 0.2em; opacity: 0.5;">© 2026 ACROBATEC | TOUS DROITS RÉSERVÉS</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Toggle
+        const tBtn = document.getElementById('tBtn');
+        tBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            tBtn.innerHTML = isDark ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+            lucide.createIcons();
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Parallax Background Fix for 2K
+        gsap.to("#mainBg", {
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true
+            },
+            y: 150,
+            scale: 1.1
+        });
+
+        // Scroll Reveal with Stagger for Grids
+        gsap.utils.toArray('.reveal').forEach(el => {
+            gsap.to(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                },
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        });
+
+        // Staggered Grid Animation
+        gsap.utils.toArray('.grid-main .glass-card').forEach((el, i) => {
+            gsap.from(el, {
+                scrollTrigger: { trigger: el, start: "top 85%" },
+                y: 40, opacity: 0, duration: 1.2, delay: i * 0.2, ease: "power3.out"
+            });
+        });
+
+        // Button Hover Effect Animation (Preload)
+        gsap.to(".btn::before", {
+            scrollTrigger: {
+                trigger: ".btn",
+                start: "top center",
+                end: "bottom bottom",
+                scrub: 1,
+                onUpdate: self => {
+                    const progress = self.progress;
+                    // This logic is handled via CSS hover, but we can add a subtle entrance animation here if needed.
+                    // Keeping CSS for smoother interaction.
+                }
+            },
+            left: "0%", opacity: 0
+        });
+
+    </script>
+</body>
+</html>
+```
