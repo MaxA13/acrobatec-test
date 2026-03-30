@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACROBATEC | Artisan Cordiste Expert</title>
+    
+    <!-- 2026 Typography: Outfit for headers, Plus Jakarta Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .contact-huge { font-size: clamp(2rem, 6vw, 5rem); font-family: 'Outfit'; font-weight: 900; line-height: 1; color: var(--text); transition: color 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <div class="fixed-bg">
+        <img src="img/hero.jpg" alt="Cordiste en pleine action" id="mainBg">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <header id="header">
+        <nav>
+            <a href="#" class="logo interactive"><img src="img/logo.png" alt="Acrobatec"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="interactive">Moi</a></li>
+                <li><a href="#expertise" class="interactive">Expertise</a></li>
+                <li><a href="#works" class="interactive">Réalisations</a></li>
+                <li><a href="#gear" class="interactive">Matériel</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#contact" class="btn-magic interactive" style="padding: 0.8rem 2rem; font-size: 0.75rem;">Contact</a>
+                <button class="mobile-menu-btn interactive" id="mBtn" aria-label="Menu mobile"><i data-lucide="menu"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="glow-orb" style="top: -10%; left: -10%;"></div>
+            <div class="hero-label gsap-reveal">Artisan Cordiste Indépendant</div>
+            <h1>
+                <div style="overflow: hidden;"><span class="gsap-reveal-text-line">L'ACCÈS LÀ OÙ</span></div>
+                <div style="overflow: hidden;"><span class="gsap-reveal-text-line"><span class="outline">LES AUTRES</span> <span class="highlight">S'ARRÊTENT.</span></span></div>
+            </h1>
+            <p class="gsap-reveal">Je suis expert en travaux d'accès difficile. Maçonnerie, nettoyage et sécurisation de bâtiments à très grande hauteur.</p>
+            <div class="gsap-reveal" style="margin-top: 2rem;">
+                <a href="#expertise" class="btn-magic interactive">Découvrir mon savoir-faire <i data-lucide="arrow-down-right"></i></a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="bento-grid">
+                <div class="glass-panel gsap-reveal interactive-panel" style="grid-column: span 2;">
+                    <span class="section-label">Depuis 2002</span>
+                    <h2 class="section-title">L'HISTOIRE D'UNE PASSION <br>ET D'UNE TECHNIQUE.</h2>
+                    <p style="font-size: 1.2rem; color: var(--text-dim); max-width: 800px; margin-bottom: 1.5rem;">
+                        Sous le nom <strong>Acrobatec</strong>, j'exerce ma passion de cordiste depuis plus de 20 ans. Mon expertise englobe la maintenance en bâtiment, la maçonnerie, la couverture et la sécurisation des chantiers les plus extrêmes. 
+                    </p>
+                    <p style="font-size: 1.1rem; color: var(--text-dim); max-width: 800px;">
+                        J'interviens principalement sur cordes, garantissant une agilité et une sécurité absolues, mais j'opère également sur nacelles et échafaudages selon les contraintes de votre patrimoine.
+                    </p>
+                </div>
+                <div class="img-wrapper gsap-reveal">
+                    <img src="img/img5.jpg" alt="Portrait en intervention">
+                    <span class="tag-minimal">SUR LE TERRAIN</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise">
+            <div class="glow-orb" style="top: 30%; right: -20%;"></div>
+            <div class="section-header gsap-reveal">
+                <span class="section-label">Mes Compétences</span>
+                <h2 class="section-title">TROIS DOMAINES.<br>UNE SEULE EXIGENCE.</h2>
+            </div>
+            
+            <div class="bento-grid">
+                <div class="glass-panel gsap-reveal interactive-panel">
+                    <div class="icon-box"><i data-lucide="hammer"></i></div>
+                    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 1rem; text-transform: uppercase;">Maçonnerie</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 2rem;">Réfection de joints, purge de façades, traitement d'épaufrures, nez de balcons et pose de picots anti-pigeons.</p>
+                    <div class="img-wrapper" style="height: 200px;"><img src="img/img1.jpg" alt="Maçonnerie"></div>
+                </div>
+                
+                <div class="glass-panel gsap-reveal interactive-panel" style="transform: translateY(40px);">
+                    <div class="icon-box"><i data-lucide="droplets"></i></div>
+                    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 1rem; text-transform: uppercase;">Nettoyage</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 2rem;">Nettoyage haute pression, démoussage de toitures et entretien de vitrerie difficile d'accès.</p>
+                    <div class="img-wrapper" style="height: 200px;"><img src="img/img2.jpg" alt="Nettoyage"></div>
+                </div>
+
+                <div class="glass-panel gsap-reveal interactive-panel" style="transform: translateY(80px);">
+                    <div class="icon-box"><i data-lucide="shield-check"></i></div>
+                    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 1rem; text-transform: uppercase;">Sécurisation</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 2rem;">Mise en place de lignes de vie, points d'ancrage, filets de protection et garde-corps autoportants.</p>
+                    <div class="img-wrapper" style="height: 200px;"><img src="img/img3.jpg" alt="Sécurité"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="works">
+            <div class="section-header gsap-reveal">
+                <span class="section-label">Études de cas</span>
+                <h2 class="section-title">AVANT / APRÈS</h2>
+            </div>
+            <div class="gallery-grid gsap-reveal">
+                <div class="img-wrapper interactive"><img src="img/before.jpg" alt="Avant l'intervention"><span class="tag-minimal">AVANT</span></div>
+                <div class="img-wrapper interactive"><img src="img/after.jpg" alt="Après l'intervention"><span class="tag-minimal">APRÈS</span></div>
+            </div>
+
+            <div class="section-header gsap-reveal" style="margin-top: 150px;">
+                <span class="section-label">Flexibilité</span>
+                <h2 class="section-title">INTERVENTIONS SUR NACELLE</h2>
+            </div>
+            <div class="bento-grid gsap-reveal">
+                <div class="img-wrapper interactive" style="height: 300px;"><img src="img/wall1.jpg" alt="Intervention mur 1"></div>
+                <div class="img-wrapper interactive" style="height: 300px;"><img src="img/wall2.jpg" alt="Intervention mur 2"></div>
+                <div class="img-wrapper interactive" style="height: 300px;"><img src="img/wall3.jpg" alt="Intervention mur 3"></div>
+            </div>
+        </section>
+
+        <section id="gear" style="padding-top: 50px;">
+            <div class="glass-panel gsap-reveal">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; margin-bottom: 3rem;">
+                        <div>
+                            <span class="section-label">Sécurité & Fiabilité</span>
+                            <h2 class="section-title" style="margin: 0;">MON MATÉRIEL</h2>
+                        </div>
+                        <p style="max-width: 400px; color: var(--text-dim);">
+                            Ma vie et la réussite de mes interventions reposent sur un matériel de pointe, vérifié périodiquement selon les normes CE les plus strictes. (EN-795, EN-361, EN-358).
+                        </p>
+                    </div>
+                    
+                    <!-- Infinite Marquee Logic Applied in JS -->
+                    <div class="equipment-track" id="equipTrack">
+                        <div class="equip-item"><img src="img/icon1.png" alt="Cordes"><span>Cordes</span></div>
+                        <div class="equip-item"><img src="img/icon2.png" alt="Harnais"><span>Harnais</span></div>
+                        <div class="equip-item"><img src="img/icon3.png" alt="Casques"><span>Casques</span></div>
+                        <div class="equip-item"><img src="img/icon4.png" alt="Mousquetons"><span>Mousquetons</span></div>
+                        <div class="equip-item"><img src="img/icon5.png" alt="Descendeurs"><span>Descendeurs</span></div>
+                        <div class="equip-item"><img src="img/icon6.png" alt="Bloqueurs"><span>Bloqueurs</span></div>
+                        <div class="equip-item"><img src="img/icon7.png" alt="Amarrages"><span>Amarrages</span></div>
+                        <!-- Duplicates for illusion of infinite scroll -->
+                        <div class="equip-item"><img src="img/icon1.png" alt="Cordes"><span>Cordes</span></div>
+                        <div class="equip-item"><img src="img/icon2.png" alt="Harnais"><span>Harnais</span></div>
+                        <div class="equip-item"><img src="img/icon3.png" alt="Casques"><span>Casques</span></div>
+                        <div class="equip-item"><img src="img/icon4.png" alt="Mousquetons"><span>Mousquetons</span></div>
+                    </div>
+            </div>
+        </section>
+
+        <section id="contact" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+            <div class="glow-orb" style="bottom: 0; left: 20%; background: radial-gradient(circle, rgba(204, 255, 0, 0.1) 0%, rgba(0,0,0,0) 70%);"></div>
+            <span class="section-label gsap-reveal">Discutons de votre projet</span>
+            <a href="mailto:contact@acrobatec.fr" class="contact-huge gsap-reveal interactive" style="text-decoration: none; display: block;">CONTACT@<br>ACROBATEC.FR</a>
+            
+            <div class="contact-info gsap-reveal">
+                <div class="contact-item">
+                    <p>Téléphone</p>
+                    <p>04 67 10 00 00</p>
+                </div>
+                <div class="contact-item">
+                    <p>Base Opérationnelle</p>
+                    <p>12 Rue de l'Industrie, Montpellier</p>
+                </div>
+                <div class="contact-item">
+                    <p>Disponibilité</p>
+                    <p style="color: var(--primary);">Intervention Rapide</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="logo"><img src="img/logo.png" alt="Acrobatec"></div>
+        <div class="cert-row">
+            <img src="img/certificate1.jpg" alt="Certificat CACES">
+            <img src="img/certificate2.jpg" alt="Certificat IRATA">
+            <img src="img/certificate3.jpg" alt="Certificat Qualibat">
+        </div>
+        <div class="copy">© 2026 ACROBATEC // TOUS DROITS RÉSERVÉS</div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Custom Cursor Logic
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorOutline = document.getElementById('cursorOutline');
+        
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0, ease: "none" });
+            gsap.to(cursorOutline, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+        });
+        
+        document.querySelectorAll('.interactive, button, a').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // Header Scrolled State
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // Mobile Menu
+        const mBtn = document.getElementById('mBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (mBtn && navLinks) {
+            mBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const isActive = navLinks.classList.contains('active');
+                mBtn.innerHTML = isActive ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+                lucide.createIcons();
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mBtn.innerHTML = '<i data-lucide="menu"></i>';
+                    lucide.createIcons();
+                });
+            });
+        }
+
+        // Interactive Glass Panels glow tracking
+        document.querySelectorAll('.interactive-panel').forEach(panel => {
+            panel.addEventListener('mousemove', e => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // --- GSAP ANIMATIONS ---
+
+        // Parallax BG
+        gsap.to("#mainBg", {
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            },
+            y: "20%",
+            scale: 1.15
+        });
+
+        // Hero Text Lines Reveal
+        gsap.fromTo(".gsap-reveal-text-line", 
+            { y: "110%", opacity: 0, rotationZ: 5 }, 
+            { y: "0%", opacity: 1, rotationZ: 0, duration: 1.5, stagger: 0.2, ease: "power4.out", delay: 0.2 }
+        );
+
+        // Standard Scroll Reveals
+        gsap.utils.toArray('.gsap-reveal').forEach(el => {
+            gsap.fromTo(el, 
+                { y: 60, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out"
+                }
+            );
+        });
+
+        // Infinite Equipment Marquee
+        gsap.to("#equipTrack", {
+            x: "-50%",
+            ease: "none",
+            repeat: -1,
+            duration: 20
+        });
+
+    </script>
+</body>
+</html>
