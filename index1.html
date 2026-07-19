@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>ACROBATEC | Artisan Cordiste Expert Montpellier</title>
+    <meta name="description" content="ACROBATEC - Artisan cordiste expert en travaux d'accès difficile à Montpellier et alentours. Maçonnerie, nettoyage et sécurisation en hauteur. Plus de 20 ans d'expérience.">
+    <meta name="keywords" content="cordiste, travaux sur cordes, accès difficile, maçonnerie hauteur, nettoyage façade, sécurisation, ligne de vie, nacelle, acrobatec, montpellier">
+    <link rel="canonical" href="https://acrobatec.fr/">
+    <link rel="icon" type="image/png" href="img/logo.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://acrobatec.fr/">
+    <meta property="og:title" content="ACROBATEC | Artisan Cordiste Expert en Accès Difficile">
+    <meta property="og:description" content="Travaux sur cordes et accès difficile : maçonnerie, nettoyage haute pression et sécurisation de chantiers en hauteur à Montpellier.">
+    <meta property="og:image" content="https://acrobatec.fr/img/hero.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://acrobatec.fr/">
+    <meta property="twitter:title" content="ACROBATEC | Artisan Cordiste Expert en Accès Difficile">
+    <meta property="twitter:description" content="Travaux sur cordes et accès difficile : maçonnerie, nettoyage haute pression et sécurisation de chantiers en hauteur à Montpellier.">
+    <meta property="twitter:image" content="https://acrobatec.fr/img/hero.jpg">
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ACROBATEC",
+      "image": "https://acrobatec.fr/img/hero.jpg",
+      "logo": "https://acrobatec.fr/img/logo.png",
+      "url": "https://acrobatec.fr",
+      "telephone": "04 67 10 00 00",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "12 Rue de l'Industrie",
+        "addressLocality": "Montpellier",
+        "postalCode": "34000",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.610769,
+        "longitude": 3.876716
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Montpellier et sa région"
+      },
+      "description": "Artisan cordiste indépendant expert en travaux d'accès difficile, maçonnerie de façade, nettoyage et sécurisation en grande hauteur."
+    }
+    </script>
+    
+    <!-- 2026 Typography: Outfit for headers, Plus Jakarta Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .contact-huge { font-size: clamp(2rem, 6vw, 5rem); font-family: 'Outfit'; font-weight: 900; line-height: 1; color: var(--text); transition: color 0.3s; }
+        
+        /* Добавленные стили для мобильной оптимизации */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .img-wrapper img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .bento-grid {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        .gallery-grid {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            z-index: 1000;
+        }
+        
+        /* Запрет горизонтального скролла для конкретных элементов */
+        .fixed-bg {
+            width: 100vw;
+            overflow: hidden;
+        }
+        
+        .fixed-bg img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <div class="fixed-bg">
+        <img src="img/hero.jpg" alt="Cordiste en pleine action" id="mainBg">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <header id="header">
+        <nav>
+            <a href="#" class="logo interactive" aria-label="Retour à l'accueil"><img src="img/logo.png" alt="Acrobatec - Artisan Cordiste"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="interactive" aria-label="Navigation vers la section Moi">Moi</a></li>
+                <li><a href="#expertise" class="interactive" aria-label="Navigation vers la section Expertise">Expertise</a></li>
+                <li><a href="#works" class="interactive" aria-label="Navigation vers la section Réalisations">Réalisations</a></li>
+                <li><a href="#gear" class="interactive" aria-label="Navigation vers la section Matériel">Matériel</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#contact" class="btn-magic interactive" style="padding: 0.8rem 2rem; font-size: 0.75rem;" aria-label="Contactez-nous">Contact</a>
+                <button class="mobile-menu-btn interactive" id="mBtn" aria-label="Menu mobile"><i data-lucide="menu"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="glow-orb" style="top: -10%; left: -10%;"></div>
+            <div class="hero-label gsap-reveal">Artisan Cordiste Indépendant</div>
+            <h1>
+                <span class="sr-only">Acrobatec - Artisan Cordiste Montpellier : </span>
+                <div style="overflow: hidden;"><span class="gsap-reveal-text-line">L'ACCÈS LÀ OÙ</span></div>
+                <div style="overflow: hidden;"><span class="gsap-reveal-text-line"><span class="outline">LES AUTRES</span> <span class="highlight">S'ARRÊTENT.</span></span></div>
+            </h1>
+            <p class="gsap-reveal">Je suis expert en travaux d'accès difficile. Maçonnerie, nettoyage et sécurisation de bâtiments à très grande hauteur.</p>
+            <div class="gsap-reveal" style="margin-top: 2rem;">
+                <a href="#expertise" class="btn-magic interactive">Découvrir mon savoir-faire <i data-lucide="arrow-down-right"></i></a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="bento-grid">
+                <div class="glass-panel gsap-reveal interactive-panel col-span-2">
+                    <span class="section-label">Depuis 2002</span>
+                    <h2 class="section-title">L'HISTOIRE D'UNE PASSION <br>ET D'UNE TECHNIQUE.</h2>
+                    <p style="font-size: 1.2rem; color: var(--text-dim); max-width: 800px; margin-bottom: 1.5rem;">
+                        Sous le nom <strong>Acrobatec</strong>, j'exerce ma passion de cordiste depuis plus de 20 ans. Mon expertise englobe la maintenance en bâtiment, la maçonnerie, la couverture et la sécurisation des chantiers les plus extrêmes. 
+                    </p>
+                    <p style="font-size: 1.1rem; color: var(--text-dim); max-width: 800px;">
+                        J'interviens principalement sur cordes, garantissant une agilité et une sécurité absolues, mais j'opère également sur nacelles et échafaudages selon les contraintes de votre patrimoine.
+                    </p>
+                </div>
+                <div class="img-wrapper gsap-reveal">
+                    <img src="img/newimage4.jpg" alt="Artisan cordiste d'Acrobatec suspendu sur cordes pour des travaux d'accès difficile" loading="lazy">
+                    <span class="tag-minimal">SUR LE TERRAIN</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise">
+            <div class="glow-orb" style="top: 30%; right: -20%;"></div>
+            <div class="section-header gsap-reveal">
+                <span class="section-label">Mes Compétences</span>
+                <h2 class="section-title">TROIS DOMAINES.<br>UNE SEULE EXIGENCE.</h2>
+            </div>
+            
+            <div class="bento-grid">
+                <div class="glass-panel gsap-reveal interactive-panel">
+                    <div class="icon-box"><i data-lucide="hammer"></i></div>
+                    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 1rem; text-transform: uppercase;">Maçonnerie</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 2rem;">Réfection de joints, purge de façades, traitement d'épaufrures, nez de balcons et pose de picots anti-pigeons.</p>
+                    <div class="img-wrapper" style="aspect-ratio: 16/10;"><img src="img/newimage1.jpg" alt="Travaux de maçonnerie et réfection de joints en hauteur par un cordiste Acrobatec" loading="lazy"></div>
+                </div>
+                
+                <div class="glass-panel gsap-reveal interactive-panel" style="transform: translateY(40px);">
+                    <div class="icon-box"><i data-lucide="droplets"></i></div>
+                    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 1rem; text-transform: uppercase;">Nettoyage</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 2rem;">Nettoyage haute pression, démoussage de toitures et entretien de vitrerie difficile d'accès.</p>
+                    <div class="img-wrapper" style="aspect-ratio: 16/10;"><img src="img/newimage2.jpg" alt="Nettoyage haute pression de façade et lavage de vitres en accès difficile par Acrobatec" loading="lazy"></div>
+                </div>
+
+                <div class="glass-panel gsap-reveal interactive-panel" style="transform: translateY(80px);">
+                    <div class="icon-box"><i data-lucide="shield-check"></i></div>
+                    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 1rem; text-transform: uppercase;">Sécurisation</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 2rem;">Mise en place de lignes de vie, points d'ancrage, filets de protection et garde-corps autoportants.</p>
+                    <div class="img-wrapper" style="aspect-ratio: 16/10;"><img src="img/newimage3.jpg" alt="Installation de systèmes de sécurité et lignes de vie par un cordiste professionnel" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="works">
+            <div class="section-header gsap-reveal">
+                <span class="section-label">Études de cas</span>
+                <h2 class="section-title">AVANT / APRÈS</h2>
+            </div>
+            <div class="gallery-grid gsap-reveal">
+                <div class="img-wrapper interactive"><img src="img/before.jpg" alt="Restauration de façade en hauteur - Avant l'intervention d'Acrobatec"><span class="tag-minimal">AVANT</span></div>
+                <div class="img-wrapper interactive"><img src="img/after.jpg" alt="Restauration de façade en hauteur - Après travaux de maçonnerie par Acrobatec"><span class="tag-minimal">APRÈS</span></div>
+            </div>
+
+            <div class="section-header gsap-reveal" style="margin-top: 150px;">
+                <span class="section-label">Flexibilité</span>
+                <h2 class="section-title">INTERVENTIONS SUR NACELLE</h2>
+            </div>
+            <div class="bento-grid gsap-reveal">
+                <div class="img-wrapper interactive" style="aspect-ratio: 3/4;"><img src="img/wall1.jpg" alt="Intervention de maçonnerie et ravalement de mur extérieur depuis une nacelle élévatrice" loading="lazy"></div>
+                <div class="img-wrapper interactive" style="aspect-ratio: 3/4;"><img src="img/wall2.jpg" alt="Travaux de nettoyage et rénovation de façade sur nacelle par Acrobatec" loading="lazy"></div>
+                <div class="img-wrapper interactive" style="aspect-ratio: 3/4;"><img src="img/wall3.jpg" alt="Restauration et peinture de mur extérieur difficile d'accès sur nacelle" loading="lazy"></div>
+            </div>
+
+            <div class="section-header gsap-reveal" style="margin-top: 150px;">
+                <span class="section-label">Galerie</span>
+                <h2 class="section-title">TRAVAUX SPECTACULAIRES</h2>
+            </div>
+            <div class="bento-grid gsap-reveal">
+                <!-- Row 1: 3 vertical images -->
+                <div class="img-wrapper interactive" style="aspect-ratio: 3/4;">
+                    <img src="img/newimage.jpg" alt="Cordiste professionnel en cours de descente contrôlée" loading="lazy">
+                    <span class="tag-minimal">ACCÈS DIFFICILE</span>
+                </div>
+
+                <div class="img-wrapper interactive" style="aspect-ratio: 3/4;">
+                    <img src="img/img3.jpg" alt="Travaux de toiture, couverture et zinguerie par Acrobatec" loading="lazy">
+                    <span class="tag-minimal">TOITURE & ZINGUERIE</span>
+                </div>
+
+                <div class="img-wrapper interactive" style="aspect-ratio: 3/4;">
+                    <img src="img/tmp.jpg" alt="Chantier de sécurisation en hauteur de monument historique" loading="lazy">
+                    <span class="tag-minimal">MONUMENTS</span>
+                </div>
+
+                <!-- Row 2: 3 square images -->
+                <div class="img-wrapper interactive" style="aspect-ratio: 1/1;">
+                    <img src="img/img1.jpg" alt="Nettoyage haute pression et sablage de structure métallique" loading="lazy">
+                    <span class="tag-minimal">SABLAGE</span>
+                </div>
+
+                <div class="img-wrapper interactive" style="aspect-ratio: 1/1;">
+                    <img src="img/img2.jpg" alt="Installation de garde-corps de sécurité collectifs sur toit terrasse" loading="lazy">
+                    <span class="tag-minimal">SÉCURITÉ TOIT</span>
+                </div>
+
+                <div class="img-wrapper interactive" style="aspect-ratio: 1/1;">
+                    <img src="img/img4.jpg" alt="Contrôle technique et réparation de nez de balcons dégradés" loading="lazy">
+                    <span class="tag-minimal">MAÇONNERIE</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="gear" style="padding-top: 50px;">
+            <div class="glass-panel gsap-reveal">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; margin-bottom: 3rem;">
+                        <div>
+                            <span class="section-label">Sécurité & Fiabilité</span>
+                            <h2 class="section-title" style="margin: 0;">MON MATÉRIEL</h2>
+                        </div>
+                        <p style="max-width: 400px; color: var(--text-dim);">
+                            Ma vie et la réussite de mes interventions reposent sur un matériel de pointe, vérifié périodiquement selon les normes CE les plus strictes. (EN-795, EN-361, EN-358).
+                        </p>
+                    </div>
+                    
+                    <!-- Infinite Marquee Logic Applied in JS -->
+                    <div class="equipment-track" id="equipTrack">
+                        <div class="equip-item"><img src="img/icon1.png" alt="Cordes"><span>Cordes</span></div>
+                        <div class="equip-item"><img src="img/icon2.png" alt="Harnais"><span>Harnais</span></div>
+                        <div class="equip-item"><img src="img/icon3.png" alt="Casques"><span>Casques</span></div>
+                        <div class="equip-item"><img src="img/icon4.png" alt="Mousquetons"><span>Mousquetons</span></div>
+                        <div class="equip-item"><img src="img/icon5.png" alt="Descendeurs"><span>Descendeurs</span></div>
+                        <div class="equip-item"><img src="img/icon6.png" alt="Bloqueurs"><span>Bloqueurs</span></div>
+                        <div class="equip-item"><img src="img/icon7.png" alt="Amarrages"><span>Amarrages</span></div>
+                        <!-- Duplicates for illusion of infinite scroll -->
+                        <div class="equip-item"><img src="img/icon1.png" alt="Cordes"><span>Cordes</span></div>
+                        <div class="equip-item"><img src="img/icon2.png" alt="Harnais"><span>Harnais</span></div>
+                        <div class="equip-item"><img src="img/icon3.png" alt="Casques"><span>Casques</span></div>
+                        <div class="equip-item"><img src="img/icon4.png" alt="Mousquetons"><span>Mousquetons</span></div>
+                    </div>
+            </div>
+        </section>
+
+        <section id="contact" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+            <div class="glow-orb" style="bottom: 0; left: 20%; background: radial-gradient(circle, rgba(204, 255, 0, 0.1) 0%, rgba(0,0,0,0) 70%);"></div>
+            <span class="section-label gsap-reveal">Discutons de votre projet</span>
+            <a href="mailto:contact@acrobatec.fr" class="contact-huge gsap-reveal interactive" style="text-decoration: none; display: block;" aria-label="Envoyer un email à contact@acrobatec.fr">CONTACT@<br>ACROBATEC.FR</a>
+            
+            <div class="contact-info gsap-reveal">
+                <div class="contact-item">
+                    <p>Téléphone</p>
+                    <p>04 67 10 00 00</p>
+                </div>
+                <div class="contact-item">
+                    <p>Base Opérationnelle</p>
+                    <p>12 Rue de l'Industrie, Montpellier</p>
+                </div>
+                <div class="contact-item">
+                    <p>Disponibilité</p>
+                    <p style="color: var(--primary);">Intervention Rapide</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="logo"><img src="img/logo.png" alt="Acrobatec - Travaux en hauteur et accès difficile" loading="lazy"></div>
+        <div class="cert-row">
+            <img src="img/certificate1.jpg" alt="Certificat CACES" loading="lazy">
+            <img src="img/certificate2.jpg" alt="Certificat IRATA" loading="lazy">
+            <img src="img/certificate3.jpg" alt="Certificat Qualibat" loading="lazy">
+        </div>
+        <div class="copy">© 2026 ACROBATEC // TOUS DROITS RÉSERVÉS</div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Fermer la galerie">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightboxImg" src="" alt="">
+            <p id="lightboxCaption" class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Custom Cursor Logic
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorOutline = document.getElementById('cursorOutline');
+        
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0, ease: "none" });
+            gsap.to(cursorOutline, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+        });
+        
+        // Dynamic cursor hover selection including images
+        document.querySelectorAll('.interactive, button, a, .img-wrapper').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // Header Scrolled State
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // Mobile Menu
+        const mBtn = document.getElementById('mBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (mBtn && navLinks) {
+            mBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const isActive = navLinks.classList.contains('active');
+                mBtn.innerHTML = isActive ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+                lucide.createIcons();
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mBtn.innerHTML = '<i data-lucide="menu"></i>';
+                    lucide.createIcons();
+                });
+            });
+        }
+
+        // Interactive Glass Panels glow tracking
+        document.querySelectorAll('.interactive-panel').forEach(panel => {
+            panel.addEventListener('mousemove', e => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // --- GSAP ANIMATIONS ---
+
+        // Parallax BG
+        gsap.to("#mainBg", {
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            },
+            y: "20%",
+            scale: 1.15
+        });
+
+        // Hero Text Lines Reveal
+        gsap.fromTo(".gsap-reveal-text-line", 
+            { y: "110%", opacity: 0, rotationZ: 5 }, 
+            { y: "0%", opacity: 1, rotationZ: 0, duration: 1.5, stagger: 0.2, ease: "power4.out", delay: 0.2 }
+        );
+
+        // Standard Scroll Reveals
+        gsap.utils.toArray('.gsap-reveal').forEach(el => {
+            gsap.fromTo(el, 
+                { y: 60, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out"
+                }
+            );
+        });
+
+        // Infinite Equipment Marquee
+        gsap.to("#equipTrack", {
+            x: "-50%",
+            ease: "none",
+            repeat: -1,
+            duration: 20
+        });
+
+        // Lightbox Gallery Setup
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        if (lightbox && lightboxImg && lightboxCaption && lightboxClose) {
+            document.querySelectorAll('.img-wrapper img').forEach(img => {
+                const wrapper = img.parentElement;
+                
+                // Add pointer style
+                wrapper.style.cursor = 'pointer';
+
+                wrapper.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightboxCaption.textContent = img.alt || "Intervention Acrobatec";
+                    lightbox.classList.add('active');
+                    lightbox.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden'; // prevent scrolling
+                });
+            });
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            };
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === lightboxClose) {
+                    closeLightbox();
+                }
+            });
+
+            // Close on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
